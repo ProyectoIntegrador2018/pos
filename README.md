@@ -8,8 +8,8 @@ The project aims to develop new functionality for a Point of Sale system (BluePO
 
 * [Client Details](#client-details)
 * [Environment URLS](#environment-urls)
-* [Da Team](#team)
-* [Management resources](#management-resources)
+* [Da Team](#da-team)
+* [Management tools](#management-tools)
 * [Setup the project](#setup-the-project)
 * [Running the stack for development](#running-the-stack-for-development)
 * [Stop the project](#stop-the-project)
@@ -21,7 +21,7 @@ The project aims to develop new functionality for a Point of Sale system (BluePO
 
 | Name               | Email             | Role |
 | ------------------ | ----------------- | ---- |
-| Aldo Lares | prueba@prueba.com | Employee  |
+| Aldo Lares | alares@bluepeople.com | Employee  |
 
 
 ### Environment URLS
@@ -35,7 +35,7 @@ The project aims to develop new functionality for a Point of Sale system (BluePO
 | -------------- | ----------------- | ----------- |
 | Alan Velasco | A01113373@itesm.mx | Development |
 | Juan Manuel Perez Font | prueba@itesm.mx | Development |
-| Nombre miembro | prueba@itesm.mx | Development |
+| Eduardo Benitez | prueba@itesm.mx | Development |
 
 ### Management tools
 
@@ -48,6 +48,8 @@ You should ask for access to this tools if you don't have it already:
 * [Documentation](https://drive.com)
 
 ## Development
+
+The further sections are left as a guide, as the development practices for the project have not been specified yet.
 
 ### Setup the project
 
