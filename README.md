@@ -53,9 +53,7 @@ The further sections are left as a guide, as the development practices for the p
 
 ### Tech Stack and Development Tools
 
-The backend for the service is written in C#
-
-This is all we know for sure.
+The backend for the service is written in C# with the use of .NET core.
 
 ### Setup the project
 
