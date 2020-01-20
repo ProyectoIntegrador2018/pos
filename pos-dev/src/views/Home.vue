@@ -1,14 +1,15 @@
 <template>
   <div class="home">
+    <!-- Services components receives services data as a binded property -->
     <Service class="service" v-for="(service, index) of services" v-bind:key="index" v-bind:service="service"></Service>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Service from '@/components/Service.vue'
 import axios from 'axios'
 
+// Export a default vue component
 export default {
   name: 'home',
   components: {
@@ -19,8 +20,12 @@ export default {
       services: []
     }
   },
+  /**
+   * Mounting of the view. Here, requests to backend for services
+   * list is done and added to the services property. 
+   */
   mounted () {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
+    axios.get('http://localhost:5000/api/posts')
       .then((response) => {
         for (const post of response.data) {
           this.services.push({
@@ -30,7 +35,6 @@ export default {
             price: Math.floor(Math.random() * (1000 - 1 + 1)) + 1
           })
         }
-        // this.services = [...response.data].slice(0, 20)
       })
       .catch((error) => {
         alert(error)

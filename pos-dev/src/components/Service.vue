@@ -25,7 +25,8 @@ Vue.use(Vue2Filters)
 
 @Component
 export default class Service extends Vue {
-  @Prop() private service!: any;
+    // This property receives the services connected to the component
+    @Prop() private service!: any;
 }
 </script>
 

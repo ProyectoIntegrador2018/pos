@@ -1,0 +1,17 @@
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/appsettings.Development.json
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/appsettings.json
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/Properties/launchSettings.json
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/POS
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/POS.deps.json
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/POS.runtimeconfig.json
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/POS.runtimeconfig.dev.json
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/POS.dll
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/POS.pdb
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/staticwebassets/POS.StaticWebAssets.Manifest.cache
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/staticwebassets/POS.StaticWebAssets.xml
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.MvcApplicationPartsAssemblyInfo.cache
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.AssemblyInfoInputs.cache
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.AssemblyInfo.cs
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.RazorTargetAssemblyInfo.cache
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.dll
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.pdb
