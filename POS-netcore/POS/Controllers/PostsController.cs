@@ -8,6 +8,10 @@ namespace POS.Controllers
     [ApiController]
     public class PostsController : ControllerBase 
     {
+        /// <summary>
+        /// Gets the dummy data for PostsController GET request
+        /// </summary>
+        /// <returns>The list of dummy posts</returns>
         [HttpGet]
         public async  Task<ActionResult<string>> Get()
         {
