@@ -25,8 +25,8 @@ The project aims to develop new functionality for a Point of Sale system (BluePO
 
 ### Environment URLS
 
-* **Production** - [TBD](TBD)
-* **Development** - [TBD](TBD)
+* **Production** - [bluepos-pagofon.com](https://bluepos-pagofon.netlify.com/)
+* **Development** - See [Deployment](DEPLOYMENT.md)
 
 ### Da team
 
@@ -119,3 +119,7 @@ info: Microsoft.Hosting.Lifetime[0]
 ### Stop the project
 
 To stop the project, go into any of the currently running terminal windows and type `Ctrl-C`, both servers should stop running by typing this into each terminal window with the currently running projects.
+
+
+### Deployment
+See [Deployment](DEPLOYMENT.md)
