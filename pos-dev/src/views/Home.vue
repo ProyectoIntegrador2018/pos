@@ -25,7 +25,7 @@ export default {
    * list is done and added to the services property.
    */
   mounted () {
-    axios.get('http://localhost:5000/api/posts')
+    axios.get('https://bluepos-back.herokuapp.com/api/posts')
       .then((response) => {
         for (const post of response.data) {
           this.services.push({
