@@ -4,6 +4,10 @@ The deployment of this project is done in two parts. The first part deploys the 
 
 ## Deploying the frontend
 
+> Deployment of the frontend website is done automatically everytime master is updated. However, there's also the option to trigger the deployments manually.
+
+### Manual Deployment
+
 First, you need to install the Netlify CLI and then login to your Netlify account:
 
 `npm install -g netlify-cli`
