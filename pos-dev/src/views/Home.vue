@@ -22,7 +22,7 @@ export default {
   },
   /**
    * Mounting of the view. Here, requests to backend for services
-   * list is done and added to the services property. 
+   * list is done and added to the services property.
    */
   mounted () {
     axios.get('http://localhost:5000/api/posts')
