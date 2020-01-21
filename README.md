@@ -48,6 +48,13 @@ You should ask for access to this tools if you don't have it already:
 
 The further sections are left as a guide to executing the dummy version of the project, as the development practices for the project have not been specified yet. The actual project is intended to run on a local machine in BluePeople's offices, inside their own code. Therefore, execution of this project acts as a dummy test of the components requested by BluePeople.
 
+### Tech Stack
+
+| Technology               | Version     | 
+| ------------------ | ----------------- | 
+| Vue.js | 2.6.11 |
+| .NET Core | 3.1.0 |
+
 ### Setup the project
 
 This project uses [Vue.js](https://vuejs.org/v2/guide/installation.html) and [.NET Core](https://dotnet.microsoft.com/download), so both should be installed in order to run it. After both are installed, you can proceed to clone the project:
