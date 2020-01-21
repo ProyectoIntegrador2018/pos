@@ -1,4 +1,5 @@
 # POS-BP
+[![Netlify Status](https://api.netlify.com/api/v1/badges/036fde6b-1c8b-4567-a121-93b5ddddcfdf/deploy-status)](https://app.netlify.com/sites/bluepos-pagofon/deploys)
 
 This is the repository for the project of Team POS during the winter period of 2020.
 
