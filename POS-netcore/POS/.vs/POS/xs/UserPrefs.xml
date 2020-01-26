@@ -1,9 +1,11 @@
 ﻿<Properties StartupConfiguration="{B52E1B64-D28A-45CF-9B91-16A43B8D61DC}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/PostsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ProductsController.cs">
     <Files>
-      <File FileName="Controllers/PostsController.cs" Line="14" Column="33" />
-      <File FileName="Program.cs" Line="8" Column="28" />
-      <File FileName="Startup.cs" Line="1" Column="1" />
+      <File FileName="Controllers/PostsController.cs" Line="43" Column="58" />
+      <File FileName="Program.cs" />
+      <File FileName="Startup.cs" />
+      <File FileName="Models/ServiceList.cs" Line="55" Column="55" />
+      <File FileName="Models/PagoFonResponse.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,9 +13,8 @@
           <Node name="POS" expanded="True">
             <Node name="POS" expanded="True">
               <Node name="Dependencies" expanded="True" />
-              <Node name="Controllers" expanded="True">
-                <Node name="PostsController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>

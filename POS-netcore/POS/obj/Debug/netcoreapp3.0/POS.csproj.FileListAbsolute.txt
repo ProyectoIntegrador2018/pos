@@ -16,3 +16,5 @@
 /Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.dll
 /Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.pdb
 /Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.csprojAssemblyReference.cache
+/Users/apple/Projects/POS-core/POS-netcore/POS/bin/Debug/netcoreapp3.0/Newtonsoft.Json.dll
+/Users/apple/Projects/POS-core/POS-netcore/POS/obj/Debug/netcoreapp3.0/POS.csproj.CopyComplete
