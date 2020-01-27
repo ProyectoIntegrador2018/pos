@@ -1,0 +1,81 @@
+.DS_Store
+pos-dev/node_modules
+pos-dev/dist
+
+pos-dev/tests/e2e/videos/
+pos-dev/tests/e2e/screenshots/
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local Netlify folder
+.netlify
+
+# Backend
+###################
+# compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.cache
+*.suo
+# Include dlls if they’re in the NuGet packages directory
+!POS-netcore/POS/packages/*/lib/*.dll
+!POS-netcore/POS/packages/*/lib/*/*.dll
+# Include dlls if they're in the CommonReferences directory
+!POS-netcore/POS/*CommonReferences/*.dll
+####################
+# VS Upgrade stuff #
+####################
+UpgradeLog.XML
+_UpgradeReport_Files/
+###############
+# Directories #
+###############
+POS-netcore/POS/bin/
+POS-netcore/POS/obj/
+POS-netcore/POS/TestResults/
+###################
+# Web publish log #
+###################
+*.Publish.xml
+# OS generated files #
+######################
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+[Bb]in
+[Oo]bj
+[Tt]est[Rr]esults
+*.suo
+*.user
+*.[Cc]ache
+*[Rr]esharper*
+packages
+NuGet.exe
+_[Ss]cripts
+*.exe
+*.dll
+*.nupkg
+*.ncrunchsolution
+*.dot[Cc]over

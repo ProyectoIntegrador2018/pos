@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div @click="promptData" class="container">
       <div class="center-text even-row title">
           <h2>{{ service.name }}</h2>
       </div>
@@ -27,6 +27,9 @@ Vue.use(Vue2Filters)
 export default class Service extends Vue {
     // This property receives the services connected to the component
     @Prop() private service!: any;
+    promptData () {
+      this.$emit('modal', this.service)
+    }
 }
 </script>
 
@@ -69,7 +72,7 @@ h2 {
 }
 
 .data {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(244, 244, 244);
     width: 49%;
     display: flex;
 }
