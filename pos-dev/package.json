@@ -14,11 +14,8 @@
     "core-js": "^3.4.4",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
-<<<<<<< HEAD
-=======
     "vue-cli": "^2.9.6",
     "vue-js-modal": "^1.3.31",
->>>>>>> 73544c4897b9f0899aff78a7aff2611407d46f73
     "vue-property-decorator": "^8.3.0",
     "vue-router": "^3.1.3",
     "vue2-filters": "^0.9.1"
