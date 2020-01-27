@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div @click="promptdata" class="container">
       <div class="center-text even-row title">
           <h2>{{ service.name }}</h2>
       </div>
@@ -14,6 +14,9 @@
       <div class="center-text even-row price">
           <h2>{{ service.price | currency }} MXN</h2>
       </div>
+      <modal name="modal-service">
+            hello world!
+      </modal>
   </div>
 </template>
 
@@ -27,6 +30,9 @@ Vue.use(Vue2Filters)
 export default class Service extends Vue {
     // This property receives the services connected to the component
     @Prop() private service!: any;
+    promptdata () {
+      this.$modal.show('modal-service')
+    }
 }
 </script>
 
