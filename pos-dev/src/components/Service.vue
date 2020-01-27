@@ -17,8 +17,8 @@
       <modal name="modal-service">
             <form action='#' method='post'>
                 <div v-for="value in service" :key="value" >
-                    <label for='service-name'> {{value}} : </label>
-                    <input type="text" id="service-name">
+                    <label for='service-attr'> {{value}} : </label>
+                    <input type="text" id="service-attr">
                 </div>
             </form>
             <button>Enviar</button>
