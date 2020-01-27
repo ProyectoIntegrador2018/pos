@@ -14,6 +14,16 @@
       <div class="center-text even-row price">
           <h2>{{ service.price | currency }} MXN</h2>
       </div>
+      <modal name="modal-service">
+            <form action='#' method='post'>
+                <div v-for="value in service" :key="value" >
+                    <label for='service-attr'> {{value}} : </label>
+                    <input type="text" id="service-attr">
+                </div>
+            </form>
+            <button>Enviar</button>
+            <button @click="closeModal">Cancelar</button>
+      </modal>
   </div>
 </template>
 
