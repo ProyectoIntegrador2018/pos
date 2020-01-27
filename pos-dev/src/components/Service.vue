@@ -16,8 +16,8 @@
       </div>
       <modal name="modal-service">
             <form action='#' method='post'>
-                <div v-for="value in service" :key="value" >
-                    <label for='service-attr'> {{value}} : </label>
+                <div v-for="(value, propertyName) in service" v-bind:key="value" >
+                    <label for='service-attr'> {{ propertyName }} : </label>
                     <input type="text" id="service-attr">
                 </div>
             </form>
@@ -38,10 +38,12 @@ export default class Service extends Vue {
     // This property receives the services connected to the component
     @Prop() private service!: any;
     promptData () {
+      console.log(this.service)
       this.$modal.show('modal-service')
     }
     closeModal () {
       // close the modal
+      this.$modal.hide('modal-service')
     }
 }
 </script>
