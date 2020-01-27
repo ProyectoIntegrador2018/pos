@@ -16,18 +16,13 @@
       </div>
       <modal name="modal-service">
             <form action='#' method='post'>
-                <div class="container"> <label for='service-name'>Servicio: </label>
+                <div v-for="value in service" :key="value" >
+                    <label for='service-name'> {{value}} : </label>
                     <input type="text" id="service-name">
-                    <label for='service-agreement'>Convenio: </label>
-                    <input type="number" id="service-name">
-                    <label for='service-reference'>Referencia: </label>
-                    <input type="number" id="service-name">
-                    <label for='service-amount'>Cantidad: </label>
-                    <input type="number" id="service-name">
-                    <button>Enviar</button>
-                    <button @click="closeModal">Cancelar</button>
                 </div>
             </form>
+            <button>Enviar</button>
+            <button @click="closeModal">Cancelar</button>
       </modal>
   </div>
 </template>
