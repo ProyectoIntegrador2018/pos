@@ -15,7 +15,17 @@
           <h2>{{ service.price | currency }} MXN</h2>
       </div>
       <modal name="modal-service">
-            hello world!
+            <form action='#' method='post'>
+                <div class="container"> <label for='service-name'>Servicio: </label>
+                    <input type="text" id="service-name">
+                    <label for='service-agreement'>Convenio: </label>
+                    <input type="number" id="service-name">
+                    <label for='service-reference'>Referencia: </label>
+                    <input type="number" id="service-name">
+                    <label for='service-amount'>Cantidad: </label>
+                    <input type="number" id="service-name">
+                </div>
+            </form>
       </modal>
   </div>
 </template>
