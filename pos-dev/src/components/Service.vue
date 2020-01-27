@@ -1,5 +1,5 @@
 <template>
-  <div @click="promptdata" class="container">
+  <div @click="promptData" class="container">
       <div class="center-text even-row title">
           <h2>{{ service.name }}</h2>
       </div>
@@ -16,16 +16,13 @@
       </div>
       <modal name="modal-service">
             <form action='#' method='post'>
-                <div class="container"> <label for='service-name'>Servicio: </label>
-                    <input type="text" id="service-name">
-                    <label for='service-agreement'>Convenio: </label>
-                    <input type="number" id="service-name">
-                    <label for='service-reference'>Referencia: </label>
-                    <input type="number" id="service-name">
-                    <label for='service-amount'>Cantidad: </label>
-                    <input type="number" id="service-name">
+                <div v-for="value in service" :key="value" >
+                    <label for='service-attr'> {{value}} : </label>
+                    <input type="text" id="service-attr">
                 </div>
             </form>
+            <button>Enviar</button>
+            <button @click="closeModal">Cancelar</button>
       </modal>
   </div>
 </template>
@@ -40,8 +37,11 @@ Vue.use(Vue2Filters)
 export default class Service extends Vue {
     // This property receives the services connected to the component
     @Prop() private service!: any;
-    promptdata () {
+    promptData () {
       this.$modal.show('modal-service')
+    }
+    closeModal () {
+      // close the modal
     }
 }
 </script>
