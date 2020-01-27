@@ -61,7 +61,6 @@ export default {
     axios
       .get('https://bluepos-back.herokuapp.com/api/products')
       .then(response => {
-        console.log(response)
         for (let index = 0; index < response.data.ServiceList.ServiceID.length; index++) {
           this.services.push({
             name: response.data.ServiceList.ServiceName[index],
