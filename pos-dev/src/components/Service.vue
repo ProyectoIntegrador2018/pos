@@ -38,10 +38,7 @@ export default class Service extends Vue {
     // This property receives the services connected to the component
     @Prop() private service!: any;
     promptData () {
-      this.$modal.show('modal-service')
-    }
-    closeModal () {
-      // close the modal
+      this.$emit('modal', this.service)
     }
 }
 </script>
@@ -85,7 +82,7 @@ h2 {
 }
 
 .data {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(244, 244, 244);
     width: 49%;
     display: flex;
 }
