@@ -59,14 +59,15 @@ export default {
    */
   mounted () {
     axios
-      .get('https://bluepos-back.herokuapp.com/api/posts')
+      .get('https://bluepos-back.herokuapp.com/api/products')
       .then(response => {
-        for (const post of response.data) {
+        console.log(response)
+        for (let index = 0; index < response.data.ServiceList.ServiceID.length; index++) {
           this.services.push({
-            name: post.title,
-            inventory: Math.floor(Math.random() * (100 - 1 + 1)) + 1,
-            code: Math.floor(Math.random() * (9999 - 999 + 1)) + 999,
-            price: Math.floor(Math.random() * (1000 - 1 + 1)) + 1
+            name: response.data.ServiceList.ServiceName[index],
+            inventory: response.data.ServiceList.ServiceID[index],
+            code: response.data.ServiceList.ServiceCode[index],
+            price: response.data.ServiceList.MaxAmount[index]
           })
         }
       })
