@@ -54,6 +54,7 @@ _UpgradeReport_Files/
 POS-netcore/POS/bin/
 POS-netcore/POS/obj/
 POS-netcore/POS/TestResults/
+POS-netcore/POS/.vs/
 ###################
 # Web publish log #
 ###################
