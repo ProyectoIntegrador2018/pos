@@ -1,13 +1,18 @@
 <template>
   <div class="home">
     <!-- Services components receives services data as a binded property -->
-    <Service
-      class="service"
-      v-for="(service, index) of services"
-      v-bind:key="index"
-      v-bind:service="service"
-      v-on:modal="openModal($event)"
-    ></Service>
+    <div class="services-container">
+      <Service
+        class="service"
+        v-for="(service, index) of services"
+        v-bind:key="index"
+        v-bind:service="service"
+        v-on:modal="openModal($event)"
+      ></Service>
+    </div>
+    <div class="cart-container">
+
+    </div>
     <modal name="modal-service" :width="'60%'" :height="'65%'">
       <div class="modal-container">
         <h2 class="form-header">Datos del servicio</h2>
@@ -80,10 +85,23 @@ export default {
 .home {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   padding: 25px;
-  height: 100%;
+}
+
+.services-container {
+  flex: 7;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
   flex-wrap: wrap;
+  height: min-content;
+}
+
+.cart-container {
+  flex: 3;
+  background-color: rgb(40, 75, 140);
+  border-radius: 5px;
+  height: calc(100vh - 60px);
 }
 
 .service {
