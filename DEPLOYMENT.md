@@ -40,7 +40,9 @@ First, you need to install the [Heroku CLI](https://devcenter.heroku.com/article
 `heroku login`
 `heroku container:login`
 
-Then, after you've made your desired changes to the project, you have to rebuild the Docker image and push it to the docker registry:
+Then, after you've made your desired changes to the project, compile it again with `dotnet publish -c Release`.
+Afterwards, build the Docker image and push it to the docker registry with the following command:
+
 
 `heroku container:push web`
 
