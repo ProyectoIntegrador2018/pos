@@ -28,7 +28,6 @@ namespace POS.Controllers
                     ""TransactionFee"":""0.10"",
                     ""Commission"":""0.10""
                 }";
-
             // This is intended to simulate the deserialization and serialization of
             // the actual response from PagoFon.
             var response = JsonConvert.DeserializeObject<TransactionResponse>(jsonString);
