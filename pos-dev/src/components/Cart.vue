@@ -31,8 +31,8 @@
         <h3 class="total-value">{{ total() | currency }} MXN</h3>
       </div>
       <div class="action-buttons">
-        <button class="button cancel">CANCELAR Y BORRAR TODO</button>
-        <button class="button send">COBRAR</button>
+        <button class="button cancel" v-on:click="$emit('cancel')">CANCELAR Y BORRAR TODO</button>
+        <button class="button send" v-on:click="$emit('pay')">COBRAR</button>
       </div>
     </div>
   </div>
@@ -61,46 +61,6 @@ export default class Cart extends Vue implements ICart {
     }
     return result
   }
-
-  // computed () {
-  //   return {
-  //     total: function () {
-  //       let result = 0
-  //       if (!this.items) return result
-  //       for (let i = 0; i < this.items.length; i++) {
-  //         result += (this.items[i].value * this.items[i].qty)
-  //       }
-  //       return result
-  //     }
-  //   }
-  // }
-  // name: 'Cart',
-  // components: {
-  //   DeleteIcon
-  // },
-  // data: () => {
-  //   return {
-  //     // removeItem: function (index, id) {
-  //     //   console.log(index, id)
-  //     //   this.$emit('remove', { index, id })
-  //     // }
-  //   }
-  // },
-  // props: {
-  //   items: Array
-  // },
-  // methods: {
-  //   total () {
-  //     let result = 0
-  //     if (!this.items) return result
-  //     for (let i = 0; i < this.items.length; i++) {
-  //       result += (this.items[i].value * this.items[i].qty)
-  //     }
-  //     return result
-  //   }
-  // }
-  // computed: {
-  // }
 }
 </script>
 <style lang="scss">
@@ -111,7 +71,6 @@ export default class Cart extends Vue implements ICart {
   margin: -25px -25px -25px 0px;
   border: 2px solid #ededed;
   box-sizing: border-box;
-  /* max-width: 30%; */
   padding: 25px;
 
   display: flex;
@@ -121,7 +80,6 @@ export default class Cart extends Vue implements ICart {
 
 .cart-header {
   width: 100%;
-  /* height: 50px; */
   background-color: #4567ae;
   border-radius: 5px 5px 0px 0px;
   display: flex;
