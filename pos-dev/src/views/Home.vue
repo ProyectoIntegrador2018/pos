@@ -59,6 +59,7 @@ export default {
       items: [],
       currentValue: null,
       values: [null, null, 0],
+      url: 'https://bluepos-back.herokuapp.com/api',
       openModal: function (service) {
         this.openedService = service
         this.values[2] = this.openedService.price
@@ -69,7 +70,7 @@ export default {
       },
       sendModal: function () {
         axios
-          .post('https://bluepos-back.herokuapp.com/api/transactions', {
+          .post(`${this.url}/transactions`, {
             ProductCode: this.openedService.code,
             Amount: Number(this.values[2]),
             Email: this.values[0],
@@ -98,7 +99,7 @@ export default {
       },
       removeItem: function (event) {
         axios
-          .delete('https://bluepos-back.herokuapp.com/api/transactions', { id: event.id })
+          .delete(`${this.url}/transactions/${event.id}`)
           .then(response => {
             this.$toastr.s('Success', response.data.ResponseDescription)
             this.items.splice(event.index, 1)
@@ -115,7 +116,7 @@ export default {
    */
   mounted () {
     axios
-      .get('https://bluepos-back.herokuapp.com/api/products')
+      .get(`${this.url}/products`)
       .then(response => {
         for (let index = 0; index < response.data.ServiceList.ServiceID.length; index++) {
           this.services.push({
