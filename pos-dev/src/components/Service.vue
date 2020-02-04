@@ -8,7 +8,7 @@
               <p>Código: {{ service.code }}</p>
           </div>
           <div class="data">
-              <p>Existencia: {{ service.inventory }}</p>
+              <p>ID: {{ service.id }}</p>
           </div>
       </div>
       <div class="center-text even-row price">
