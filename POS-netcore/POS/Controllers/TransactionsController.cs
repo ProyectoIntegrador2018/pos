@@ -31,7 +31,6 @@ namespace POS.Controllers
                     ""TransactionFee"":""0.10"",
                     ""Commission"":""0.10""
                 }";
-
             // This is intended to simulate the deserialization and serialization of
             // the actual response from PagoFon.
             var response = JsonConvert.DeserializeObject<TransactionResponse>(jsonString);
@@ -42,6 +41,24 @@ namespace POS.Controllers
             }
 
             return JsonConvert.SerializeObject(response);
+        }
+
+        [HttpDelete("{id}")]
+        public string DeleteTransaction(int id) {
+            // In case the transaction doesn't exist
+            var jsonString = "";
+            if(id == 0) {
+                jsonString = @"{
+                ""ResponseCode"":""999"",
+                ""ResponseDescription"":""Txn Does not Exist"",
+            }";
+            } else {
+                jsonString = @"{
+                ""ResponseCode"":""000"",
+                ""ResponseDescription"":""Txn Deleted"",
+            }";
+            }
+            return jsonString;
         }
     }
     
