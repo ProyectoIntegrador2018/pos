@@ -23,7 +23,10 @@ namespace POS.Controllers
                     ""Balance"":""99980.000000"",
                     ""ConfirmationCode"":""20171206091723"",
                     ""TransactionID"":""5378"",
-                    ""TransactionInfo"":""{\""TransactionId\"":\""091723\"",\""OperatorCode\"":\""20171206\""}"",
+                    ""TransactionInfo"":{
+                        ""TransactionId"":""091723"",
+                        ""OperatorCode"":""20171206""
+                    },
                     ""RequestDateTime"":""2017-12-06 09:17:22"",
                     ""TransactionFee"":""0.10"",
                     ""Commission"":""0.10""

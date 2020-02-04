@@ -1,60 +1,111 @@
 <template>
-  <div class="home">
-    <!-- Services components receives services data as a binded property -->
-    <div class="services-container">
-      <Service
-        class="service"
-        v-for="(service, index) of services"
-        v-bind:key="index"
-        v-bind:service="service"
-        v-on:modal="openModal($event)"
-      ></Service>
+  <div class="main-container">
+    <div class="header">
+      <img src="../../assets/logo-white.svg" class="logo">
     </div>
-    <div class="cart-container">
-
-    </div>
-    <modal name="modal-service" :width="'60%'" :height="'65%'">
-      <div class="modal-container">
-        <h2 class="form-header">Datos del servicio</h2>
-        <form class="modal-form">
-          <div
-            class="modal-body"
-            v-for="(value, propertyName, index) in openedService"
+    <div class="home">
+      <!-- Services components receives services data as a binded property -->
+      <div class="services-container">
+        <div class="services">
+          <Service
+            class="service"
+            v-for="(service, index) of services"
             v-bind:key="index"
-          >
-            <label v-bind:for="propertyName">{{ propertyName }}:</label>
-            <input type="text" v-bind:id="propertyName" />
-          </div>
-        </form>
-        <div class="button-bottom">
-          <button v-on:click="closeModal()">Enviar</button>
-          <button class="modal-default-button" v-on:click="closeModal()">Cancelar</button>
+            v-bind:service="service"
+            v-on:modal="openModal($event)"
+          ></Service>
         </div>
       </div>
-    </modal>
+      <Cart v-bind:items="items" v-on:remove="" />
+      <modal name="modal-service" :width="'60%'" :height="'65%'">
+        <div class="modal-container">
+          <h2 class="form-header">Datos del servicio</h2>
+          <form class="modal-form">
+            <div
+              class="modal-body"
+              v-for="(data, index) in openedService.modalData"
+              v-bind:key="index"
+            >
+              <label v-bind:for="data.field">{{ data.field }}:</label>
+              <input v-bind:type="data.type" v-bind:id="data.field" v-bind:value="data.default" v-model="values[index]" />
+            </div>
+          </form>
+          <div class="button-bottom">
+            <button v-on:click="sendModal()">Enviar</button>
+            <button class="modal-default-button" v-on:click="closeModal()">Cancelar</button>
+          </div>
+        </div>
+      </modal>
+    </div>
   </div>
 </template>
 
 <script>
 import Service from '@/components/Service.vue'
+import Cart from '@/components/Cart.vue'
 import axios from 'axios'
 
 // Export a default vue component
 export default {
   name: 'home',
   components: {
-    Service
+    Service,
+    Cart
   },
   data: () => {
     return {
       services: [],
       openedService: {},
+      items: [],
+      currentValue: null,
+      values: [null, null, 0],
       openModal: function (service) {
         this.openedService = service
+        this.values[2] = this.openedService.price
         this.$modal.show('modal-service')
       },
       closeModal: function () {
         this.$modal.hide('modal-service')
+      },
+      sendModal: function () {
+        axios
+          .post('http://localhost:5000/api/transactions', {
+            ProductCode: this.openedService.code,
+            Amount: Number(this.values[2]),
+            Email: this.values[0],
+            PhoneNumber: this.values[1]
+          })
+          .then(response => {
+            if (response.data.ResponseCode === '999') {
+              this.$toastr.e('Error', response.data.ResponseDescription)
+              return
+            }
+            this.items.push({
+              qty: 1,
+              name: this.openedService.name,
+              value: this.values[2],
+              id: response.data.TransactionInfo.TransactionId
+            })
+            this.values[0] = null
+            this.values[1] = null
+            this.values[2] = this.openedService.price
+            this.$toastr.s('Success', response.data.ResponseDescription)
+            this.$modal.hide('modal-service')
+          })
+          .catch(error => {
+            this.$toastr.e('Error', error)
+          })
+      },
+      removeItem: function (index, id) {
+        axios
+          .delete('http://localhost:5000/api/transactions', { id })
+          .then(response => {
+            this.$toastr.s('Success', response.data.ResponseDescription)
+            this.items.splice(index, 1)
+          })
+          .catch(error => {
+            this.$toastr.e('Error', response.data.ResponseDescription)
+          })
       }
     }
   },
@@ -69,9 +120,24 @@ export default {
         for (let index = 0; index < response.data.ServiceList.ServiceID.length; index++) {
           this.services.push({
             name: response.data.ServiceList.ServiceName[index],
-            inventory: response.data.ServiceList.ServiceID[index],
+            id: response.data.ServiceList.ServiceID[index],
             code: response.data.ServiceList.ServiceCode[index],
-            price: response.data.ServiceList.MaxAmount[index]
+            price: response.data.ServiceList.MaxAmount[index],
+            modalData: [
+              {
+                field: 'Correo electrónico',
+                type: 'email'
+              },
+              {
+                field: 'Número telefónico',
+                type: 'tel'
+              },
+              {
+                field: 'Cantidad',
+                type: 'number',
+                default: response.data.ServiceList.MaxAmount[index]
+              }
+            ]
           })
         }
       })
@@ -82,14 +148,48 @@ export default {
 }
 </script>
 <style>
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .home {
   display: flex;
   flex-direction: row;
   padding: 25px;
+  background-color: #EDEFF1;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(40, 75, 140);
+  height: 70px;
+  width: 100%;
+}
+
+.logo {
+  margin-left: 20px;
+  margin-top: 15px;
+  height: 35px;
 }
 
 .services-container {
   flex: 7;
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 130px);
+  background-color: white;
+  margin-right: 25px;
+  border-radius: 5px;
+  border: 2px solid #EDEDED;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+.services {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
@@ -97,21 +197,10 @@ export default {
   height: min-content;
 }
 
-.cart-container {
-  flex: 3;
-  background-color: rgb(40, 75, 140);
-  border-radius: 5px;
-  height: calc(100vh - 60px);
-}
-
-.service {
-  margin: 10px;
-}
-
 .modal-form {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .modal-container {
@@ -157,11 +246,7 @@ button {
  * The following styles are auto-applied to elements with
  * transition="modal" when their visibility is toggled
  * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
  */
-
 .modal-enter {
   opacity: 1;
 }

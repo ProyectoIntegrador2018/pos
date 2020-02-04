@@ -8,7 +8,7 @@ namespace POS.Models
         public float Balance { get; set; }
         public string ConfirmationCode { get; set; }
         public string TransactionID { get; set; }
-        public string TransactionInfo { get; set; }
+        public TransactionInfo TransactionInfo { get; set; }
         public DateTime RequestDateTime { get; set; }
         public float TransactionFee { get; set; }
         public float Commission { get; set; }
@@ -16,7 +16,7 @@ namespace POS.Models
         /// <summary>
         /// TransactionResponse based on documentation provided by PagoFon, on method Topup
         /// </summary>
-        public TransactionResponse(string responseCode, string responseDescription, float balance, string confirmationCode, string transactionID, string transactionInfo, DateTime requestDateTime, float transactionFee, float commission)
+        public TransactionResponse(string responseCode, string responseDescription, float balance, string confirmationCode, string transactionID, TransactionInfo transactionInfo, DateTime requestDateTime, float transactionFee, float commission)
         {
             ResponseCode = responseCode;
             ResponseDescription = responseDescription;
