@@ -15,8 +15,8 @@
           <td>{{ item.qty }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.qty * item.value | currency }}</td>
-          <td>
-            <delete-icon v-on:click="removeItem(index, item.id)" />
+          <td v-on:click="$emit('remove', { index, id: item.id })">
+            <delete-icon  />
           </td>
         </tr>
       </table>
@@ -51,9 +51,10 @@ export default {
   },
   data: () => {
     return {
-      removeItem: function (index, id) {
-        this.$emit('remove', { index, id })
-      }
+      // removeItem: function (index, id) {
+      //   console.log(index, id)
+      //   this.$emit('remove', { index, id })
+      // }
     }
   },
   props: {

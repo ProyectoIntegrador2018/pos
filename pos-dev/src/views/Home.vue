@@ -16,7 +16,7 @@
           ></Service>
         </div>
       </div>
-      <Cart v-bind:items="items" v-on:remove="" />
+      <Cart v-bind:items="items" v-on:remove="removeItem($event)" />
       <modal name="modal-service" :width="'60%'" :height="'65%'">
         <div class="modal-container">
           <h2 class="form-header">Datos del servicio</h2>
@@ -69,7 +69,7 @@ export default {
       },
       sendModal: function () {
         axios
-          .post('http://localhost:5000/api/transactions', {
+          .post('https://bluepos-back.herokuapp.com/api/transactions', {
             ProductCode: this.openedService.code,
             Amount: Number(this.values[2]),
             Email: this.values[0],
@@ -96,15 +96,15 @@ export default {
             this.$toastr.e('Error', error)
           })
       },
-      removeItem: function (index, id) {
+      removeItem: function (event) {
         axios
-          .delete('http://localhost:5000/api/transactions', { id })
+          .delete('https://bluepos-back.herokuapp.com/api/transactions', { id: event.id })
           .then(response => {
             this.$toastr.s('Success', response.data.ResponseDescription)
-            this.items.splice(index, 1)
+            this.items.splice(event.index, 1)
           })
           .catch(error => {
-            this.$toastr.e('Error', response.data.ResponseDescription)
+            this.$toastr.e('Error', error)
           })
       }
     }
