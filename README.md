@@ -1,6 +1,8 @@
 # POS-BP
 [![Netlify Status](https://api.netlify.com/api/v1/badges/036fde6b-1c8b-4567-a121-93b5ddddcfdf/deploy-status)](https://app.netlify.com/sites/bluepos-pagofon/deploys)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/79c4af4b32334d6d1699/maintainability)](https://codeclimate.com/github/ProyectoIntegrador2018/pos/maintainability)
+
 This is the repository for the project of Team POS during the winter period of 2020.
 
 The project aims to develop new functionality for a Point of Sale system (BluePOS), originally developed by software development firm Blue People.
