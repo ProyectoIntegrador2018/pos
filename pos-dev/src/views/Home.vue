@@ -69,7 +69,7 @@ export default {
       },
       sendModal: function () {
         axios
-          .post('http://localhost:5000/api/transactions', {
+          .post('https://bluepos-back.herokuapp.com/api/transactions', {
             ProductCode: this.openedService.code,
             Amount: Number(this.values[2]),
             Email: this.values[0],
