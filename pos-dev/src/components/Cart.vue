@@ -26,9 +26,9 @@
         <h3 class="subtotal">Subtotal</h3>
         <h3
           class="subtotal-value"
-        >{{ total | currency }} MXN</h3>
+        >{{ total() | currency }} MXN</h3>
         <h3 class="total">Total</h3>
-        <h3 class="total-value">{{ total | currency }} MXN</h3>
+        <h3 class="total-value">{{ total() | currency }} MXN</h3>
       </div>
       <div class="action-buttons">
         <button class="button cancel">CANCELAR Y BORRAR TODO</button>
@@ -43,33 +43,64 @@ import DeleteIcon from 'mdi-vue/Delete'
 import Vue2Filters from 'vue2-filters'
 
 Vue.use(Vue2Filters)
+Vue.component('delete-icon', DeleteIcon)
 
-export default {
-  name: 'Cart',
-  components: {
-    DeleteIcon
-  },
-  data: () => {
-    return {
-      // removeItem: function (index, id) {
-      //   console.log(index, id)
-      //   this.$emit('remove', { index, id })
-      // }
+export interface ICart {
+  items: any[]
+}
+
+@Component
+export default class Cart extends Vue implements ICart {
+  @Prop() items: any[] = []
+
+  total () {
+    let result = 0
+    if (!this.items) return result
+    for (let i = 0; i < this.items.length; i++) {
+      result += (this.items[i].value * this.items[i].qty)
     }
-  },
-  props: {
-    items: Array
-  },
-  computed: {
-    total: function () {
-      let result = 0
-      if (!this.items) return result
-      for (let i = 0; i < this.items.length; i++) {
-        result += (this.items[i].value * this.items[i].qty)
-      }
-      return result
-    }
+    return result
   }
+
+  // computed () {
+  //   return {
+  //     total: function () {
+  //       let result = 0
+  //       if (!this.items) return result
+  //       for (let i = 0; i < this.items.length; i++) {
+  //         result += (this.items[i].value * this.items[i].qty)
+  //       }
+  //       return result
+  //     }
+  //   }
+  // }
+  // name: 'Cart',
+  // components: {
+  //   DeleteIcon
+  // },
+  // data: () => {
+  //   return {
+  //     // removeItem: function (index, id) {
+  //     //   console.log(index, id)
+  //     //   this.$emit('remove', { index, id })
+  //     // }
+  //   }
+  // },
+  // props: {
+  //   items: Array
+  // },
+  // methods: {
+  //   total () {
+  //     let result = 0
+  //     if (!this.items) return result
+  //     for (let i = 0; i < this.items.length; i++) {
+  //       result += (this.items[i].value * this.items[i].qty)
+  //     }
+  //     return result
+  //   }
+  // }
+  // computed: {
+  // }
 }
 </script>
 <style lang="scss">
