@@ -17,9 +17,7 @@ namespace POS.Controllers
         [HttpPost]
         public string PostTransaction(TransactionRequest request)
         {
-            var jsonString = "";
-            if(request.Amount != 0) {
-                jsonString = @"{
+            var jsonString = @"{
                     ""ResponseCode"":""000"",
                     ""ResponseDescription"":""Txn Successful"",
                     ""Balance"":""99980.000000"",
@@ -30,22 +28,15 @@ namespace POS.Controllers
                     ""TransactionFee"":""0.10"",
                     ""Commission"":""0.10""
                 }";
-            } else {
-                jsonString = @"{
-                    ""ResponseCode"":""999"",
-                    ""ResponseDescription"":""Txn Failed"",
-                    ""Balance"":""99980.000000"",
-                    ""ConfirmationCode"":""20171206091723"",
-                    ""TransactionID"":""5378"",
-                    ""TransactionInfo"":""{\""TransactionId\"":\""091723\"",\""OperatorCode\"":\""20171206\""}"",
-                    ""RequestDateTime"":""2017-12-06 09:17:22"",
-                    ""TransactionFee"":""0.10"",
-                    ""Commission"":""0.10""
-                }";
-            }
+
             // This is intended to simulate the deserialization and serialization of
             // the actual response from PagoFon.
             var response = JsonConvert.DeserializeObject<TransactionResponse>(jsonString);
+
+            if(request.Amount == 0) {
+                response.ResponseCode = "999";
+                response.ResponseDescription = "Txn Failed";
+            }
 
             return JsonConvert.SerializeObject(response);
         }
