@@ -16,7 +16,7 @@
           ></Service>
         </div>
       </div>
-      <Cart v-bind:items="items" v-on:remove="removeItem($event)" />
+      <Cart v-bind:items="items" v-on:remove="removeItem($event)" v-on:cancel="cancelCart()" v-on:pay="payCart()"/>
       <modal name="modal-service" :width="'60%'" :height="'65%'">
         <div class="modal-container">
           <h2 class="form-header">Datos del servicio</h2>
@@ -107,6 +107,22 @@ export default {
           .catch(error => {
             this.$toastr.e('Error', error)
           })
+      },
+      cancelCart () {
+        for (let i = 0; i < this.items.length; i++) {
+          this.removeItem({
+            id: this.items[i].id,
+            index: i
+          })
+        }
+      },
+      payCart () {
+        if (this.items.length > 0) {
+          this.$toastr.s('Artículos cobrados', 'Success')
+          this.items = []
+        } else {
+          this.$toastr.e('No hay artículos en el carrito actual', 'Error')
+        }
       }
     }
   },
