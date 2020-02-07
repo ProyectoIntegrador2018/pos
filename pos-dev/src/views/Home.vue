@@ -69,55 +69,60 @@ export default {
         this.$modal.hide('modal-service')
       },
       sendModal: function () {
-        axios
-          .post(`${this.url}/transactions`, {
-            ProductCode: this.openedService.code,
-            Amount: Number(this.values[2]),
-            Email: this.values[0],
-            PhoneNumber: this.values[1]
-          })
-          .then(response => {
-            if (response.data.ResponseCode === '999') {
-              this.$toastr.e('Error', response.data.ResponseDescription)
-              return
-            }
-            this.items.push({
-              qty: 1,
-              name: this.openedService.name,
-              value: this.values[2],
-              id: response.data.TransactionInfo.TransactionId
-            })
-            this.values[0] = null
-            this.values[1] = null
-            this.values[2] = this.openedService.price
-            this.$toastr.s('Success', response.data.ResponseDescription)
-            this.$modal.hide('modal-service')
-          })
-          .catch(error => {
-            this.$toastr.e('Error', error)
-          })
+        this.items.push({
+          qty: 1,
+          name: this.openedService.name,
+          value: this.values[2],
+          email: this.values[0],
+          phone: this.values[1],
+          amount: Number(this.values[2])
+        })
+        this.values[0] = null
+        this.values[1] = null
+        this.values[2] = this.openedService.price
+        this.$toastr.s('Success', '')
+        this.$modal.hide('modal-service')
       },
       removeItem: function (event) {
-        axios
-          .delete(`${this.url}/transactions/${event.id}`)
-          .then(response => {
-            this.$toastr.s('Success', response.data.ResponseDescription)
-            this.items.splice(event.index, 1)
-          })
-          .catch(error => {
-            this.$toastr.e('Error', error)
-          })
+        // this process canceled payments. The client requested for it to be removed.
+        this.items.splice(event.index, 1)
       },
       cancelCart () {
-        for (let i = 0; i < this.items.length; i++) {
-          this.removeItem({
-            id: this.items[i].id,
-            index: i
-          })
-        }
+        // this process canceled payments. The client requested for it to be removed.
+        // for (let i = 0; i < this.items.length; i++) {
+        //   axios
+        //     .delete(`${this.url}/transactions/${this.items[i].id}`)
+        //     .then(response => {
+        //       this.$toastr.s('Success', response.data.ResponseDescription)
+        //     })
+        //     .catch(error => {
+        //       this.$toastr.e('Error', error)
+        //     })
+        // }
+        this.items = []
       },
       payCart () {
         if (this.items.length > 0) {
+          for (let index = 0; index < this.items.length; index++) {
+            axios
+              .post(`${this.url}/transactions`, {
+                ProductCode: this.items[index].code,
+                Amount: this.items[index].amount,
+                Email: this.items[index].email,
+                PhoneNumber: this.items[index].phone
+              })
+              .then(response => {
+                if (response.data.ResponseCode === '999') {
+                  this.$toastr.e('Error', response.data.ResponseDescription)
+                  return
+                }
+                this.$toastr.s('Success', response.data.ResponseDescription)
+                this.$modal.hide('modal-service')
+              })
+              .catch(error => {
+                this.$toastr.e('Error', error)
+              })
+          }
           this.$toastr.s('Artículos cobrados', 'Success')
           this.items = []
         } else {
