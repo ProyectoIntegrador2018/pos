@@ -32,12 +32,12 @@ The project aims to develop new functionality for a Point of Sale system (BluePO
 
 ### Da team
 
-| Name           | Email             |
-| -------------- | ----------------- |
-|Denisse Damián  | denissedam@gmail.com 
-|Jorge Lira      | a01039755@itesm.mx
-|Isabela Escalanete |a01193251@itesm.mx
-|Andrés Villanueva |a01280060@itesm.mx
+| Name           | Email             | Role 
+| -------------- | ----------------- |-----------
+|Denisse Damián  | a01193246@itesm.mx| 
+|Jorge Lira      | a01039755@itesm.mx|
+|Isabela Escalanete |a01193251@itesm.mx|
+|Andrés Villanueva |a01280060@itesm.mx|
 
 ### Management tools
 
