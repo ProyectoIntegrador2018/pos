@@ -32,11 +32,12 @@ The project aims to develop new functionality for a Point of Sale system (BluePO
 
 ### Da team
 
-| Name           | Email             | Role        |
-| -------------- | ----------------- | ----------- |
-| Alan Velasco | A01113373@itesm.mx | Development |
-| Juan Manuel Perez Font | A00819815@itesm.mx | Development |
-| Eduardo Benitez | A01039203@itesm.mx | Development |
+| Name           | Email             |
+| -------------- | ----------------- |
+|Denisse Damián  | denissedam@gmail.com 
+|Jorge Lira      | a01039755@itesm.mx
+|Isabela Escalanete |a01193251@itesm.mx
+|Andrés Villanueva |a01280060@itesm.mx
 
 ### Management tools
 
