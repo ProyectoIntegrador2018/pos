@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using POS.Models;
+using System.IO;
 
 namespace POS.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/BillPay")]
     [ApiController]
-    public class ProductsController : ControllerBase 
+    public class BillPayControllers : ControllerBase 
     {
         /// <summary>
         /// Gets the dummy data for ProductsController GET request
@@ -42,6 +43,17 @@ namespace POS.Controllers
 
             return JsonConvert.SerializeObject(response);
         }
+
+
+        [HttpPost]
+        public BillPayRequest billPaySend(BillPayRequest request){
+
+            //Aqui se debe de hacer validaciones para que todos los que se necesita del metodo venga
+
+            return request;
+
+        } 
     }
+
     
 }

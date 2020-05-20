@@ -6,9 +6,9 @@ using POS.Models;
 
 namespace POS.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/TopUp")]
     [ApiController]
-    public class ProductsController : ControllerBase 
+    public class TopUpControllers : ControllerBase 
     {
         /// <summary>
         /// Gets the dummy data for ProductsController GET request
