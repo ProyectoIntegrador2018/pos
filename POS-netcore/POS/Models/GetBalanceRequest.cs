@@ -1,11 +1,12 @@
 using System;
 namespace POS.Models
 {
+    //{"ActivationCode":"7216875370","RequestUniqueID":"2151247287976471930",
+    //"MethodName":"GetB alance","RequestIP":"127.0.0.1"}
     public class GetBalanceRequest
     {
         public string ActivationCode { get; set; }
         public string RequestUniqueID { get; set; }
-        public string BillPayData { get; set; }
         public string MethodName { get; set; }
         public string RequestIP { get; set; }
 
