@@ -6,7 +6,10 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Web;
+using System.Web.SessionState;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Linq;
 
 // paramettrizar 
 //parsear y regresar string
@@ -31,8 +34,29 @@ productdetails
 
 public class pagofonAPI
 {
+    // Key used to encrypt, it has to be this specific key.
+    String Encryption_key = "lz3M0IH4swwYCR/vcOqXPg==";
+    String Sign_Key = "lz3M0IH4swwYCR/vcOqXPg==";
+
     public static void Main(String[] args)
     {
+        string hostName = Dns.GetHostName();
+        string ipAddress = Dns.GetHostByName(hostName).AddressList[0].ToString();
+
+        string macAddress =
+            (
+                from nic in NetworkInterface.GetAllNetworkInterfaces()
+                where nic.OperationalStatus == OperationalStatus.Up
+                select nic.GetPhysicalAddress().ToString()
+            ).FirstOrDefault();
+
+        Console.WriteLine(ipAddress);
+        Console.WriteLine(macAddress);
+        GetMACAddress();
+        SessionIDManager sidm = new SessionIDManager();
+        Console.WriteLine(sidm.CreateSessionID(HttpContext.Current));
+        Console.ReadLine();
+
         String Activation_Code = "1169325819";
         // Key used to encrypt, it has to be this specific key.
         String Encryption_key = "lz3M0IH4swwYCR/vcOqXPg==";
@@ -76,6 +100,101 @@ public class pagofonAPI
         }
 
         Console.ReadLine();
+    }
+
+    public static string GetMACAddress()
+    {
+        string macAddress =
+            (
+                from nic in NetworkInterface.GetAllNetworkInterfaces()
+                where nic.OperationalStatus == OperationalStatus.Up
+                select nic.GetPhysicalAddress().ToString()
+            ).FirstOrDefault();
+
+        char[] macAddressChars = macAddress.ToCharArray();
+
+        for(int i = 0; i < macAddress.Length; i++)
+        {
+            if(macAddress[i] >= 65 && macAddress[i] <= 90)
+            {
+                macAddressChars[i] += (char)32;
+            }
+        }
+
+        macAddress = new string(macAddressChars);
+
+        for(int i = 2; i < macAddress.Length; i = i + 3)
+        {
+            macAddress = macAddress.Insert(i, ":");
+        }
+        Console.WriteLine(macAddress);
+        return macAddress;
+        //Format 50:8f:4c: 9f:39:65
+    }
+
+    public string GetBalance()
+    {
+        String Activation_Code = "1169325819";
+        String RequestUniqueID = DateTime.Now.ToString("yyyyMMddHHmmssff");
+
+        string hostName = Dns.GetHostName();
+        string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString(); 
+
+        String data = "{\"MethodName\":\"GetBalance\",\"ActivationCode\":\"" + Activation_Code + "\",\"RequestUniqueID\":\"" + RequestUniqueID + "\",\"RequestIP\":\"189.213.47.65\"}";
+
+        return MessageServer(Activation_Code, data);
+    }
+
+    //public string Billpay(string productCode, string billPayData, string amount, string loginPin)
+    //{
+    //    String Activation_Code = "1169325819";
+    //    String RequestUniqueID = DateTime.Now.ToString("yyyyMMddHHmmssff");
+
+    //    string hostName = Dns.GetHostName();
+    //    string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString();
+
+    //    String data = "{\"ActivationCode\":\"" + Activation_Code + "\",\"RequestUniqueID\":\"815125382723075560\",\"ProductCode\":\"P_NKIZE0\",\"BillPayData\":\"{\\\"Field1\\\":\\\"9876543211\\\"}\",\"Amount\":\"10.00\",\"MPin\":\"1111\",\"Email\":\"dipak.chavda @panamaxil.com\",\"ANI\":\"\",\"MethodName\":\"BillPay\",\"RequestIP\":\"127.0.0.1\"}";
+    //}
+
+    public string MessageServer(string Activation_Code, string data)
+    {
+        pagofonAPI class1 = new pagofonAPI();
+
+        byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+        String datos_post = Convert.ToBase64String(class1.encrypt(Encryption_key, Sign_Key, dataBytes));
+
+        Console.WriteLine("Cadena cifrada: " + datos_post);
+        Console.WriteLine();
+        String data_response = "";
+
+        try
+        {
+            Console.WriteLine("Inicia peticion API");
+
+            data_response = send(Activation_Code, datos_post);   //URL CONNECT
+            Console.WriteLine("Termina consumir API");
+            Console.WriteLine();
+            Console.WriteLine("Response API: " + data_response);
+            Console.WriteLine();
+            JObject jObject = JObject.Parse(data_response);
+
+            // GET DATA of JSON
+            String data_cipher = jObject["Data"].ToString();
+            // Respuesta en claro a utilizar. 
+            String response_clear =
+                Encoding.UTF8.GetString((class1.decrypt(Encryption_key, Sign_Key, Convert.FromBase64String(data_cipher))));
+            Console.WriteLine("Respuesta API descifrada: " + response_clear);
+
+            return response_clear;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.StackTrace);
+        }
+
+        Console.ReadLine();
+
+        return "";
     }
 
     public string Base64Encode(string stringToEncode)
@@ -234,6 +353,16 @@ public class pagofonAPI
             Console.WriteLine("Peticion POST: " + postData.ToString());
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+            SessionIDManager sidm = new SessionIDManager();
+            Console.WriteLine(sidm.CreateSessionID(HttpContext.Current));
+            Console.WriteLine(HttpContext.Current);
+
+            if(HttpContext.Current == null)
+            {
+                Console.WriteLine("context");
+            }
+
             request.Credentials = CredentialCache.DefaultCredentials;
             request.Method = "POST";
             request.ContentLength = postDataBytes.Length;
@@ -242,13 +371,14 @@ public class pagofonAPI
             requestStream.Write(postDataBytes, 0, postDataBytes.Length);
             requestStream.Close();
             requestStream.Dispose();
-
+            
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream responseStream = response.GetResponseStream();
+            
             StreamReader streamReader = new StreamReader(responseStream);
             string responseText = streamReader.ReadToEnd();
             responseStream.Dispose();
-
+            
             return responseText;
         }
         catch (IOException e)
