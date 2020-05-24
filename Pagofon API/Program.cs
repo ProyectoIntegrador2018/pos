@@ -22,12 +22,11 @@ using System.Linq;
 // 64
 // encrip y descrip class
 /*
- * billpay
-topup
-getbalance
-getcompanies
+billpay -
+topup -
+getbalance -
 getenterpriselist
-pinsell
+pinsell -
 productdetails
  */
 
@@ -40,6 +39,14 @@ public class pagofonAPI
 
     public static void Main(String[] args)
     {
+        pagofonAPI api = new pagofonAPI();
+
+        // Console.WriteLine("BillPay: " + api.BillPay("P_NKIZE0", "{\"Field1\":\"9876543211\"}", "10", "1111", "dipak.chavda@panamaxil.com", ""));
+        // Console.WriteLine("TopUp: " + api.TopUp("K9VGK3", "9999991803", "10.00", "1111", "", ""));
+        // Console.WriteLine("PinSell: " + api.PinSell("P_19TMRZD", "{}", "10.00", "1111", "dipak.chavda@panamaxil.com", "9428171393"));
+        // Console.WriteLine("GetProductDetails: " + api.GetProductDetails("", "", "", "0"));
+        // Console.ReadLine();
+
         string hostName = Dns.GetHostName();
         string ipAddress = Dns.GetHostByName(hostName).AddressList[0].ToString();
 
@@ -68,7 +75,7 @@ public class pagofonAPI
         Console.WriteLine("Cadena: " + data);
         Console.WriteLine();
         pagofonAPI class1 = new pagofonAPI();
-        
+
         byte[] dataBytes = Encoding.UTF8.GetBytes(data);
         String datos_post = Convert.ToBase64String(class1.encrypt(Encryption_key, Sign_Key, dataBytes));
 
@@ -86,7 +93,7 @@ public class pagofonAPI
             Console.WriteLine("Response API: " + data_response);
             Console.WriteLine();
             JObject jObject = JObject.Parse(data_response);
-            
+
             // GET DATA of JSON
             String data_cipher = jObject["Data"].ToString();
             // Respuesta en claro a utilizar. 
@@ -113,9 +120,9 @@ public class pagofonAPI
 
         char[] macAddressChars = macAddress.ToCharArray();
 
-        for(int i = 0; i < macAddress.Length; i++)
+        for (int i = 0; i < macAddress.Length; i++)
         {
-            if(macAddress[i] >= 65 && macAddress[i] <= 90)
+            if (macAddress[i] >= 65 && macAddress[i] <= 90)
             {
                 macAddressChars[i] += (char)32;
             }
@@ -123,7 +130,7 @@ public class pagofonAPI
 
         macAddress = new string(macAddressChars);
 
-        for(int i = 2; i < macAddress.Length; i = i + 3)
+        for (int i = 2; i < macAddress.Length; i = i + 3)
         {
             macAddress = macAddress.Insert(i, ":");
         }
@@ -138,23 +145,79 @@ public class pagofonAPI
         String RequestUniqueID = DateTime.Now.ToString("yyyyMMddHHmmssff");
 
         string hostName = Dns.GetHostName();
-        string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString(); 
+        string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString();
 
-        String data = "{\"MethodName\":\"GetBalance\",\"ActivationCode\":\"" + Activation_Code + "\",\"RequestUniqueID\":\"" + RequestUniqueID + "\",\"RequestIP\":\"189.213.47.65\"}";
+        String data = "{\"MethodName\":\"GetBalance\",\"ActivationCode\":\"" + Activation_Code +
+            "\",\"RequestUniqueID\":\"" + RequestUniqueID + "\",\"RequestIP\":\"" + ipAddress + "\"}";
 
         return MessageServer(Activation_Code, data);
     }
 
-    //public string Billpay(string productCode, string billPayData, string amount, string loginPin)
-    //{
-    //    String Activation_Code = "1169325819";
-    //    String RequestUniqueID = DateTime.Now.ToString("yyyyMMddHHmmssff");
+    public string TopUp(string productCode, string txReference, string amount, string loginPin, string email, string ani)
+    {
+        String Activation_Code = "1169325819";
+        String RequestUniqueID = DateTime.Now.ToString("yyyyMMddHHmmssff");
 
-    //    string hostName = Dns.GetHostName();
-    //    string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString();
+        string hostName = Dns.GetHostName();
+        string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString();
 
-    //    String data = "{\"ActivationCode\":\"" + Activation_Code + "\",\"RequestUniqueID\":\"815125382723075560\",\"ProductCode\":\"P_NKIZE0\",\"BillPayData\":\"{\\\"Field1\\\":\\\"9876543211\\\"}\",\"Amount\":\"10.00\",\"MPin\":\"1111\",\"Email\":\"dipak.chavda @panamaxil.com\",\"ANI\":\"\",\"MethodName\":\"BillPay\",\"RequestIP\":\"127.0.0.1\"}";
-    //}
+        String data = "{\"ActivationCode\":\"" + Activation_Code + "\",\"RequestUniqueID\":\"" + RequestUniqueID + 
+            "\",\"ProductCode\":\"" + productCode + "\",\"TxReference\":\"" + txReference + 
+            "\",\"Amount\":\"" + amount + "\",\"LoginPin\":\"" + loginPin + 
+            "\",\"Email\":\"" + email + "\",\"ANI\":\"" + ani + 
+            "\",\"MethodName\":\"TopUp\",\"RequestIP\":\"" + "127.0.0.1" + "\"}";
+
+        return MessageServer(Activation_Code, data);
+    }
+
+    public string BillPay(string productCode, string billPayData, string amount, string loginPin, string email, string ani)
+    {
+        String Activation_Code = "1169325819";
+        String RequestUniqueID = DateTime.Now.ToString("yyyyMMddHHmmssff");
+
+        string hostName = Dns.GetHostName();
+        // string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString();
+
+        String data = "{\"ActivationCode\":\"" + Activation_Code + "\",\"RequestUniqueID\":\"" + RequestUniqueID + 
+            "\",\"ProductCode\":\"" + productCode + "\",\"BillPayData\":\"" + "{\\\"Field1\\\":\\\"9876543211\\\"}" + 
+            "\",\"Amount\":\"" + amount + "\",\"MPin\":\"" + loginPin + 
+            "\",\"Email\":\"" + email + "\",\"ANI\":\"" + ani + 
+            "\",\"MethodName\":\"BillPay\",\"RequestIP\":\"" + "127.0.0.1" + "\"}";
+
+        return MessageServer(Activation_Code, data);
+    }
+
+    public string PinSell(string productCode, string voucherData, string amount, string loginPin, string email, string ani)
+    {
+        String Activation_Code = "1169325819";
+        String RequestUniqueID = DateTime.Now.ToString("yyyyMMddHHmmssff");
+
+        string hostName = Dns.GetHostName();
+        // string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString();
+
+        String data = "{\"ActivationCode\":\"" + Activation_Code + "\",\"RequestUniqueID\":\"" + RequestUniqueID + 
+            "\",\"ProductCode\":\"" + productCode + "\",\"VoucherData\":\"" + voucherData + 
+            "\",\"Amount\":\"" + amount + "\",\"MPin\":\"" + loginPin + 
+            "\",\"Email\":\"" + email + "\",\"ANI\":\"" + ani + 
+            "\",\"MethodName\":\"PinSell\",\"RequestIP\":\"" + "127.0.0.1" + "\"}";
+
+        return MessageServer(Activation_Code, data);
+    }
+
+    public string GetProductDetails(string productID, string systemModuleID, string systemServiceID, string productServiceType)
+    {
+        String Activation_Code = "1169325819";
+        String RequestUniqueID = DateTime.Now.ToString("yyyyMMddHHmmssff");
+
+        string hostName = Dns.GetHostName();
+        // string ipAddress = Dns.GetHostEntry(hostName).AddressList[0].ToString();
+
+        String data = "{\"ActivationCode\":\"" + Activation_Code + "\",\"SystemModuleID\":\"" + systemModuleID + 
+            "\",\"ProductServiceType\":\"" + productServiceType + "\",\"RequestUniqueID\":\"" + RequestUniqueID + 
+            "\",\"MethodName\":\"GetProductDetails\",\"RequestIP\":\"" + "127.0.0.1" + "\"}";
+
+        return MessageServer(Activation_Code, data);
+    }
 
     public string MessageServer(string Activation_Code, string data)
     {
