@@ -3,14 +3,12 @@ namespace POS.Models
 {
     public class BillPayRequest
     {
-        public string ActivationCode { get; set; }
-        public string RequestUniqueID { get; set; }
+        public string ProductCode { get; set; }
         public string BillPayData { get; set; }
+        public string Amount { get; set; }
         public string MPin { get; set; }
         public string Email { get; set; }
         public string ANI { get; set; }
-        public string MethodName { get; set; }
-        public string RequestIP { get; set; }
 
         
         /// <summary>
@@ -18,16 +16,14 @@ namespace POS.Models
         /// This only accounts for the information provided by the costumer, the other
         /// parameteres should be environment variables from the POS
         /// </summary>
-        public BillPayRequest(string activationCode, string requestUniqueID, string billPayData,string mPin, string email, string aNI, string methodName,string requestIP )
+        public BillPayRequest(string ProductCode, string BillPayData,string Amount, string MPin, string Email, string ANI)
         {
-            ActivationCode = activationCode;
-            RequestUniqueID = requestUniqueID;
-            BillPayData = billPayData;
-            MPin = mPin;
-            Email = email;
-            ANI = aNI;
-            MethodName = methodName;
-            RequestIP = requestIP;
+            this.ProductCode = ProductCode;
+            this.BillPayData = BillPayData;
+            this.Amount = Amount;
+            this.MPin = MPin;
+            this.Email = Email;
+            this.ANI = ANI;
 
 
         }

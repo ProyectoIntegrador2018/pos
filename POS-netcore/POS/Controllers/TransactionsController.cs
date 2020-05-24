@@ -35,8 +35,6 @@ namespace POS.Controllers
             // the actual response from PagoFon.
             var response = JsonConvert.DeserializeObject<TransactionResponse>(jsonString);
 
-            System.Console.WriteLine(response);
-
             if(request.Amount == 0) {
                 response.ResponseCode = "999";
                 response.ResponseDescription = "Txn Failed";
