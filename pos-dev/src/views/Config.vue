@@ -25,7 +25,7 @@
                   v-bind:key="index"
                 >
                   <label v-bind:for="data.field">{{ data.field }}:</label>
-                  <input v-bind:type="data.type" v-bind:id="data.field" v-bind:value="data.default" v-model="valuesBillPay[index]" />{{ data.default }}
+                  <input v-bind:type="data.type" v-bind:id="data.field" v-bind:value="data.default" v-model="values[index]" />{{ data.default }}
                 </div>
               </form>
               <div class="button-bottom">
@@ -34,22 +34,18 @@
               </div>
             </div>
           </modal>
-          <modal name="modal-service TopUp" :width="'80%'" :height="'80%'">
+          <modal name="modal-service TopUp" :width="'80%'" :height="'auto%'">
             <div class="modal-container">
               <h2 class="form-header">Datos del servicio TopUp</h2>
               <form class="modal-form">
-                <label>ProductCode</label>
-                <input type="text" value="K9VG K3" />
-                <label>TxReference</label>
-                <input type="text" value='{\"Field1\":\"9876543211\"}' />
-                <label>Amount</label>
-                <input type="text" value="0" />
-                <label>MPin</label>
-                <input type="text" value="1111" />
-                <label>Email</label>
-                <input type="text" value="" />
-                <label>ANI</label>
-                <input type="text" value="" />
+                <div
+                  class="modal-body"
+                  v-for="(data, index) in openedService.modalData"
+                  v-bind:key="index"
+                >
+                  <label v-bind:for="data.field">{{ data.field }}:</label>
+                  <input v-bind:type="data.type" v-bind:id="data.field" v-bind:value="data.default" v-model="values[index]" />{{ data.default }}
+                </div>
               </form>
               <div class="button-bottom">
                 <button v-on:click="topUpTest()">Test</button>
@@ -74,7 +70,7 @@ export default {
     return {
       form: {},
       openedService: {},
-      valuesBillPay: ['', '', '', '', '', ''],
+      values: ['', '', '', '', '', ''],
       metodos: [
         {
           'name': 'BillPay',
@@ -111,7 +107,37 @@ export default {
         },
         {
           'name': 'TopUp',
-          'description': 'This API provides falicity to make transaction of Bill Payment services provided by respective Vendor.'
+          'description': 'This API provides falicity to make transaction of Bill Payment services provided by respective Vendor.',
+          modalData: [
+            {
+              field: 'ProductCode',
+              type: 'text',
+              default: 'K9VG K3'
+            },
+            {
+              field: 'TxReference',
+              type: 'text',
+              default: '9999991803'
+            },
+            {
+              field: 'Amount',
+              type: 'text',
+              default: '10'
+            },
+            {
+              field: 'MPin',
+              type: 'text',
+              default: '1111'
+            },
+            {
+              field: 'Email',
+              type: 'text'
+            },
+            {
+              field: 'ANI',
+              type: 'text'
+            }
+          ]
         },
         {
           'name': 'GetBalance',
@@ -150,19 +176,20 @@ export default {
         }
       },
       billPayTest () {
-        console.log(this.valuesBillPay)
+        console.log(this.values)
         axios
           .post('localhost:5000/api/BillPay', {
-            ProductCode: this.valuesBillPay[0],
-            BillPayData: this.valuesBillPay[1],
-            Amount: this.valuesBillPay[2],
-            MPin: this.valuesBillPay[3],
-            Email: this.valuesBillPay[4],
-            ANI: this.valuesBillPay[5]
+            ProductCode: this.values[0],
+            BillPayData: this.values[1],
+            Amount: this.values[2],
+            MPin: this.values[3],
+            Email: this.values[4],
+            ANI: this.values[5]
           })
           .then(response => {
             if (response.data.ResponseCode === '999') {
               this.$toastr.e('Error', response.data.ResponseDescription)
+              this.$modal.hide('modal-service BillPay')
             }
             this.$toastr.s('Success', response.data.ResponseDescription)
             this.$modal.hide('modal-service BillPay')
