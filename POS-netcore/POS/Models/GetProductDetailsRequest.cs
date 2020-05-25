@@ -9,6 +9,8 @@ namespace POS.Models
     {
         public string ActivationCode { get; set; }
         public string SystemModuleID { get; set; }
+
+        public string ProductID { get; set; }
         public string ProductServiceType { get; set; }
         public string RequestUniqueID { get; set; }
         public string MethodName { get; set; }
@@ -20,11 +22,12 @@ namespace POS.Models
         /// This only accounts for the information provided by the costumer, the other
         /// parameteres should be environment variables from the POS
         /// </summary>
-        public GetProductDetailsRequest(string activationCode, string systemModuleID, string productServiceType,
+        public GetProductDetailsRequest(string activationCode, string systemModuleID, string productID, string productServiceType,
         string requestUniqueID, string methodName, string requestIP)
         {
             ActivationCode = activationCode;
             SystemModuleID = systemModuleID;
+            ProductID = productID;
             ProductServiceType = productServiceType;
             RequestUniqueID = requestUniqueID;
             MethodName = methodName;
