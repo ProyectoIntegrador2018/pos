@@ -20,7 +20,7 @@ namespace POS.Controllers
         {
 
             pagofonAPI llamada1 = new pagofonAPI();
-            var result = llamada1.GetProductDetails("Vendor1Topup001", "", "", "0");
+            var result = llamada1.GetProductDetails("Vendor1Topup", "", "", "0");
             //var result = llamada1.GetProductDetails(request.ProductID, request.SystemModuleID, request.SystemServiceID, request.ProductServiceType);
             var response = JsonConvert.DeserializeObject<GetProductDetailsResponse>(result);
 
