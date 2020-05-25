@@ -23,7 +23,6 @@ namespace POS.Models
             this.MPin = MPin;
             this.Email = Email;
             this.ANI = ANI;
-
         }
 
         /// <summary>
