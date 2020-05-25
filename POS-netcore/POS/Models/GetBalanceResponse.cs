@@ -1,14 +1,18 @@
 using System;
+using System.Collections.Generic;
+
 namespace POS.Models
 {
     //{"ActivationCode":"7216875370","RequestUniqueID":"2151247287976471930",
     //"MethodName":"GetB alance","RequestIP":"127.0.0.1"}
-    public class GetBalanceRequest
+    public class GetBalanceResponse
     {
-        public string ActivationCode { get; set; }
-        public string RequestUniqueID { get; set; }
-        public string MethodName { get; set; }
-        public string RequestIP { get; set; }
+
+
+        public string ResponseCode { get; set; }
+        public List<PocketBalance> pocketBalance { get; set; } //PocketBalance
+        public string AccessID { get; set; }
+
 
 
         /// <summary>
@@ -16,20 +20,20 @@ namespace POS.Models
         /// This only accounts for the information provided by the costumer, the other
         /// parameteres should be environment variables from the POS
         /// </summary>
-        public GetBalanceRequest(string activationCode, string requestUniqueID, string methodName, string requestIP)
+        public GetBalanceResponse(string responseCode, List<PocketBalance> PocketBalance, string accessID)
         {
-            ActivationCode = activationCode;
-            RequestUniqueID = requestUniqueID;
-            MethodName = methodName;
-            RequestIP = requestIP;
 
+
+
+            ResponseCode = responseCode;
+            pocketBalance = PocketBalance;
+            AccessID = accessID;
 
         }
 
         /// <summary>
         /// Parameterless class definition for JSON deserialization
         /// </summary>
-        public GetBalanceRequest() { }
+        public GetBalanceResponse() { }
     }
 }
-

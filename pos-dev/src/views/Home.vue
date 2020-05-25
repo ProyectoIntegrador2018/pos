@@ -59,7 +59,7 @@ export default {
       items: [],
       currentValue: null,
       values: [null, null, 0],
-      url: 'https://bluepos-back.herokuapp.com/api',
+      url: 'http://localhost:5000/api',
       openModal: function (service) {
         this.openedService = service
         this.values[2] = this.openedService.price
@@ -105,11 +105,13 @@ export default {
         if (this.items.length > 0) {
           for (let index = 0; index < this.items.length; index++) {
             axios
-              .post(`${this.url}/transactions`, {
-                ProductCode: this.items[index].code,
-                Amount: this.items[index].amount,
-                Email: this.items[index].email,
-                PhoneNumber: this.items[index].phone
+              .post(`${this.url}/BillPay`, {
+                ProductCode: 'P_NKIZE0',
+                BillPayData: '{Field1: "9876543211"}',
+                Amount: '10.00',
+                MPin: '1111',
+                Email: 'dipak.chav da@panamaxil.com',
+                ANI: ''
               })
               .then(response => {
                 if (response.data.ResponseCode === '999') {
@@ -118,6 +120,7 @@ export default {
                 }
                 this.$toastr.s('Success', response.data.ResponseDescription)
                 this.$modal.hide('modal-service')
+                console.log(response)
               })
               .catch(error => {
                 this.$toastr.e('Error', error)
