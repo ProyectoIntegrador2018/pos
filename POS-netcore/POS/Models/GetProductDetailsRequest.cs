@@ -7,33 +7,23 @@ namespace POS.Models
     //"MethodName":"GetProductDetails","RequestIP":"127.0.0.1"
     public class GetProductDetailsRequest
     {
-        public string ActivationCode { get; set; }
-        public string SystemModuleID { get; set; }
-
         public string ProductID { get; set; }
+        public string SystemModuleID { get; set; }
+        public string SystemServiceID { get; set; }
         public string ProductServiceType { get; set; }
-        public string RequestUniqueID { get; set; }
-        public string MethodName { get; set; }
-        public string RequestIP { get; set; }
-
 
         /// <summary>
         /// TransactionRequest based on documentation provided by PagoFon, on method Topup
         /// This only accounts for the information provided by the costumer, the other
         /// parameteres should be environment variables from the POS
         /// </summary>
-        public GetProductDetailsRequest(string activationCode, string systemModuleID, string productID, string productServiceType,
-        string requestUniqueID, string methodName, string requestIP)
+        public GetProductDetailsRequest(string productID, string systemModuleID,
+        string systemServiceID, string productServiceType)
         {
-            ActivationCode = activationCode;
-            SystemModuleID = systemModuleID;
             ProductID = productID;
+            SystemModuleID = systemModuleID;
+            SystemServiceID = systemServiceID;
             ProductServiceType = productServiceType;
-            RequestUniqueID = requestUniqueID;
-            MethodName = methodName;
-            RequestIP = requestIP;
-
-
         }
 
         /// <summary>
