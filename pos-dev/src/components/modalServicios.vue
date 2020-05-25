@@ -78,6 +78,8 @@ p {
 }
 
 .price {
+    margin-top: 10px;
+    height: 28%;
     background-color: rgb(40, 75, 140);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
