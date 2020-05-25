@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using POS.Models;
 
-
 namespace POS.Controllers
 {
     [Route("api/GetBalance")]
@@ -30,7 +29,6 @@ namespace POS.Controllers
             var response = JsonConvert.DeserializeObject<GetBalanceResponse>(result);
 
             return JsonConvert.SerializeObject(response);
-
         }
     }
 

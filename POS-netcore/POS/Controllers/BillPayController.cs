@@ -20,7 +20,6 @@ namespace POS.Controllers
     [ApiController]
 
     public class BillPayController : ControllerBase 
-
     {
         /// <summary>
         /// Gets the dummy data for ProductsController GET request
