@@ -18,7 +18,7 @@ namespace POS.Controllers
         [HttpGet]
         public string Get()
         {
-            pagoFonApi llamada1 = new pagoFonApi();
+            pagofonAPI llamada1 = new pagofonAPI();
             var result = llamada1.GetBalance();
             Console.WriteLine(result + "Result");
 

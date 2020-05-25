@@ -19,7 +19,7 @@ namespace POS.Controllers
         public string Get(GetProductDetailsRequest request)
         {
 
-            pagoFonApi llamada1 = new pagoFonApi();
+            pagofonAPI llamada1 = new pagofonAPI();
             var result = llamada1.GetProductDetails("Vendor1Topup", "", "", "0");
             // var result = llamada1.GetProductDetails(request.ProductID, "", "", request.ProductServiceType);
             Console.WriteLine("result" + result);
