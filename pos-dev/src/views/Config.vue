@@ -91,6 +91,44 @@
               </div>
             </div>
           </modal>
+          <modal name="modal-service GetBalance" :width="'80%'" :height="'auto%'">
+            <div class="modal-container">
+              <h2 class="form-header">Datos del servicio GetBalance</h2>
+              <form class="modal-form">
+                <div
+                  class="modal-body"
+                  v-for="(data, index) in openedService.modalData"
+                  v-bind:key="index"
+                >
+                  <label v-bind:for="data.field">{{ data.field }}:</label>
+                  <input v-bind:type="data.type" v-bind:id="data.field" v-bind:value="data.default" v-model="values[index]" />{{ data.default }}
+                </div>
+              </form>
+              <div class="button-bottom">
+                <button v-on:click="getBalanceTest()">Test</button>
+                <button class="modal-default-button" v-on:click="closeModal('GetBalance')">Cancelar</button>
+              </div>
+            </div>
+          </modal>
+          <modal name="modal-service GetProductDetails" :width="'80%'" :height="'auto%'">
+            <div class="modal-container">
+              <h2 class="form-header">Datos del servicio GetProductDetails</h2>
+              <form class="modal-form">
+                <div
+                  class="modal-body"
+                  v-for="(data, index) in openedService.modalData"
+                  v-bind:key="index"
+                >
+                  <label v-bind:for="data.field">{{ data.field }}:</label>
+                  <input v-bind:type="data.type" v-bind:id="data.field" v-bind:value="data.default" v-model="values[index]" />{{ data.default }}
+                </div>
+              </form>
+              <div class="button-bottom">
+                <button v-on:click="getProductDetailsTest()">Test</button>
+                <button class="modal-default-button" v-on:click="closeModal('GetProductDetails')">Cancelar</button>
+              </div>
+            </div>
+          </modal>
         </div>
     </div>
 </template>
@@ -217,7 +255,29 @@ export default {
         },
         {
           'name': 'GetProductDetails',
-          'description': 'This API provides facility to make transaction of Bill Payment services provided by respective Vendor.'
+          'description': 'This API provides facility to make transaction of Bill Payment services provided by respective Vendor.',
+          modalData: [
+            {
+              field: 'ProductID',
+              type: 'text',
+              default: 'Vendor1Topup001'
+            },
+            {
+              field: 'systemModuleID',
+              type: 'text',
+              default: ''
+            },
+            {
+              field: 'systemServiceID',
+              type: 'text',
+              default: ''
+            },
+            {
+              field: 'ProductServiceType',
+              type: 'text',
+              default: '0'
+            }
+          ]
         },
         {
           'name': 'GetEnterpriseList',
@@ -238,6 +298,12 @@ export default {
         if (metodo.name === 'GetEnterpriseList') {
           this.$modal.show('modal-service GetEnterpriseList')
         }
+        if (metodo.name === 'GetBalance') {
+          this.$modal.show('modal-service GetBalance')
+        }
+        if (metodo.name === 'GetProductDetails') {
+          this.$modal.show('modal-service GetProductDetails')
+        }
       },
       closeModal: function (metodo) {
         if (metodo === 'BillPay') {
@@ -251,6 +317,12 @@ export default {
         }
         if (metodo === 'GetEnterpriseList') {
           this.$modal.hide('modal-service GetEnterpriseList')
+        }
+        if (metodo.name === 'GetBalance') {
+          this.$modal.show('modal-service GetBalance')
+        }
+        if (metodo.name === 'GetProductDetails') {
+          this.$modal.show('modal-service GetProductDetails')
         }
       },
       billPayTest () {
@@ -329,6 +401,36 @@ export default {
             }
             this.$toastr.s('Success', response.data.ResponseDescription)
             this.$modal.hide('modal-service GetEnterpriseList')
+          })
+          .catch(error => {
+            this.$toastr.e('Error', error)
+          })
+      },
+      getBalanceTest () {
+        axios
+          .get('http://localhost:5000/api/GetBalance')
+          .then(response => {
+            if (response.data.ResponseCode === '999') {
+              this.$toastr.e('Error', response.data.ResponseDescription)
+              this.$modal.hide('modal-service GetBalance')
+            }
+            this.$toastr.s('Success', response.data.ResponseDescription)
+            this.$modal.hide('modal-service GetBalance')
+          })
+          .catch(error => {
+            this.$toastr.e('Error', error)
+          })
+      },
+      getProductDetailsTest () {
+        axios
+          .get('http://localhost:5000/api/GetProductDetails')
+          .then(response => {
+            if (response.data.ResponseCode === '999') {
+              this.$toastr.e('Error', response.data.ResponseDescription)
+              this.$modal.hide('modal-service GetBalance')
+            }
+            this.$toastr.s('Success', response.data.ResponseDescription)
+            this.$modal.hide('modal-service GetBalance')
           })
           .catch(error => {
             this.$toastr.e('Error', error)
