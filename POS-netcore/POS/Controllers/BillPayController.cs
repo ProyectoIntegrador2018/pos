@@ -18,6 +18,7 @@ namespace POS.Controllers
 {
     [Route("api/BillPay")]
     [ApiController]
+
     public class BillPayController : ControllerBase 
     {
         /// <summary>

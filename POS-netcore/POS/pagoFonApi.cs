@@ -46,6 +46,7 @@ namespace POS
         //Format 50:8f:4c: 9f:39:65
     }
 
+
     public string GetBalance()
     {
         String Activation_Code = "1169325819";
