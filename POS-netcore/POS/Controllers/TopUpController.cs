@@ -17,8 +17,7 @@ namespace POS.Controllers
         [HttpPost]
         public string topUpSend(TopUpRequest request)
         {
-
-            pagoFonApi topUp = new pagoFonApi();
+            pagofonAPI topUp = new pagofonAPI();
 
             var result = topUp.TopUp(request.ProductCode, request.TxReference, request.Amount, request.LoginPin, request.Email, request.Ani);            
             var response = JsonConvert.DeserializeObject<TopUpResponse>(result);

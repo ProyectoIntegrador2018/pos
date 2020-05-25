@@ -14,6 +14,7 @@ using System.Security.Policy;
 using System.Web;
 using System.Net;
 
+
 namespace POS.Controllers
 {
     [Route("api/BillPay")]
@@ -28,7 +29,7 @@ namespace POS.Controllers
         [HttpPost]
         public string PostBillPayTransaction(BillPayRequest request){
 
-            pagoFonApi billpay = new pagoFonApi();
+            pagofonAPI billpay = new pagofonAPI();
 
             var result = billpay.BillPay(request.ProductCode,request.BillPayData,request.Amount,request.MPin,request.Email,request.ANI);
             

@@ -2,6 +2,7 @@
   <div class="main-container">
     <div class="header">
       <img src="../../assets/logo-white.svg" class="logo">
+
     </div>
     <div class="home">
       <!-- Services components receives services data as a binded property -->
@@ -120,7 +121,6 @@ export default {
                 }
                 this.$toastr.s('Success', response.data.ResponseDescription)
                 this.$modal.hide('modal-service')
-                console.log(response)
               })
               .catch(error => {
                 this.$toastr.e('Error', error)
