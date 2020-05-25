@@ -106,7 +106,7 @@ export default {
           for (let index = 0; index < this.items.length; index++) {
             axios
               .post(`${this.url}/BillPay`, {
-                ProductCode: 'P_NKIZ E0',
+                ProductCode: 'P_NKIZE0',
                 BillPayData: '{Field1: "9876543211"}',
                 Amount: '10.00',
                 MPin: '1111',
