@@ -2,6 +2,7 @@
   <div class="main-container">
     <div class="header">
       <img src="../../assets/logo-white.svg" class="logo">
+
     </div>
     <div class="home">
       <!-- Services components receives services data as a binded property -->
@@ -61,6 +62,7 @@ export default {
       values: [null, null, 0],
       url: 'http://localhost:5000/api',
       openModal: function (service) {
+        console.log(service.name)
         this.openedService = service
         this.values[2] = this.openedService.price
         this.$modal.show('modal-service')
