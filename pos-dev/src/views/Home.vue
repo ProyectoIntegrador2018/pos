@@ -62,7 +62,6 @@ export default {
       values: [null, null, 0],
       url: 'http://localhost:5000/api',
       openModal: function (service) {
-        console.log(service.name)
         this.openedService = service
         this.values[2] = this.openedService.price
         this.$modal.show('modal-service')
@@ -122,7 +121,6 @@ export default {
                 }
                 this.$toastr.s('Success', response.data.ResponseDescription)
                 this.$modal.hide('modal-service')
-                console.log(response)
               })
               .catch(error => {
                 this.$toastr.e('Error', error)
