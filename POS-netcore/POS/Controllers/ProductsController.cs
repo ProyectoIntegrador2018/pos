@@ -22,7 +22,7 @@ namespace POS.Controllers
                 ""ResponseDescription"":""TxnSuccessful"",
                 ""ServiceList"":{
                     ""ServiceID"":[""10"",""81"",""30"",""66"",""28"",""17""],
-                    ""ServiceName"":[""P2P Transfer(Domestic)"", ""P2P NON Register Transfer (Domestic)"",""Business Payment-Customer"",""Customer Cashout – Agent"",""Customer Cash out – COC"",""MerchantPayment""],
+                    ""ServiceName"":[""TopUp"", ""GetBalance"",""BillPay"",""PinSell"",""GetEnterpriseList"",""GetProductsDetails""],
                     ""ServiceCode"":[""S2S"",""S2NR"",""S2EC"",""S2A"",""S2O"",""S2M""],
                     ""ServiceType"":[""P"",""P"",""P"",""P"",""P"",""P""],
                     ""ServiceDenominationID"":[],
