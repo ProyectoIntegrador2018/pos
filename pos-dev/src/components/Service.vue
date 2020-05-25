@@ -7,9 +7,6 @@
           <div class="data">
               <p>Código: {{ service.code }}</p>
           </div>
-          <div class="data">
-              <p>ID: {{ service.id }}</p>
-          </div>
       </div>
       <div class="center-text even-row price">
           <h2>{{ service.price | currency }} MXN</h2>
