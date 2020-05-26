@@ -59,9 +59,9 @@ public class pagofonAPI
 
         Console.WriteLine(ipAddress);
         Console.WriteLine(macAddress);
-        GetMACAddress();
+        api.GetMACAddress();
         SessionIDManager sidm = new SessionIDManager();
-        Console.WriteLine(sidm.CreateSessionID(HttpContext.Current));
+        Console.WriteLine(api.GetSessionID());
         Console.ReadLine();
 
         String Activation_Code = "1169325819";
@@ -109,7 +109,7 @@ public class pagofonAPI
         Console.ReadLine();
     }
 
-    public static string GetMACAddress()
+    public string GetMACAddress()
     {
         string macAddress =
             (
@@ -134,9 +134,25 @@ public class pagofonAPI
         {
             macAddress = macAddress.Insert(i, ":");
         }
+
         Console.WriteLine(macAddress);
+
         return macAddress;
-        //Format 50:8f:4c: 9f:39:65
+    }
+
+    public string GetSessionID()
+    {
+        SessionIDManager sidm = new SessionIDManager();
+
+        string sessionID = sidm.CreateSessionID(HttpContext.Current);
+
+        Random random = new Random();
+
+        const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        sessionID += new string(Enumerable.Repeat(chars, 12)
+          .Select(s => s[random.Next(s.Length)]).ToArray());
+
+        return sessionID;
     }
 
     public string GetBalance()
@@ -259,6 +275,9 @@ public class pagofonAPI
 
         return "";
     }
+
+    // Encryption
+    #region
 
     public string Base64Encode(string stringToEncode)
     {
@@ -418,7 +437,7 @@ public class pagofonAPI
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
             SessionIDManager sidm = new SessionIDManager();
-            Console.WriteLine(sidm.CreateSessionID(HttpContext.Current));
+
             Console.WriteLine(HttpContext.Current);
 
             if(HttpContext.Current == null)
@@ -449,5 +468,7 @@ public class pagofonAPI
             return e.ToString();
         }
     }
+
+    #endregion
 }
 
